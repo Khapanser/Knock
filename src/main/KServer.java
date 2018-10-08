@@ -12,7 +12,7 @@ public class KServer {
         }
 */
         int portNumber = 7777;//Integer.parseInt(args[0]);
-
+        while(true){
         try (
                 ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket clientSocket = serverSocket.accept();
@@ -33,12 +33,16 @@ public class KServer {
                 outputLine = kkp.processInput(inputLine);
                 out.println(outputLine);
                 if (outputLine.equals("Bye."))
-                    break;
+                    //break;
+                    clientSocket.close();
             }
-        } catch (IOException e) {
+            }
+
+        catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                     + portNumber + " or listening for a connection");
             System.out.println(e.getMessage());
+        }
         }
     }
 }
